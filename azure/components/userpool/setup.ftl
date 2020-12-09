@@ -18,7 +18,7 @@
     [#local baselineLinks = getBaselineLinks(occurrence, ["SSHKey"], false, false)]
     [#local baselineAttributes = baselineLinks["SSHKey"].State.Attributes]
     [#local keyvaultId = baselineAttributes["KEYVAULT_ID"]]
-    [#local keyvault = getReference(keyvaultId, "", NAME_ATTRIBUTE_TYPE)]
+    [#local keyvault = getReference(AZURE_PROVIDER, keyvaultId, NAME_ATTRIBUTE_TYPE)]
 
     [#-- Instantiate CLI Args --]
     [#local replyUrls = []]

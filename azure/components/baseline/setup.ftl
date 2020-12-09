@@ -28,7 +28,7 @@
     [#-- Segment Seed --]
     [#local segmentSeedId = resources["segmentSeed"].Id]
     [#local segmentSeedValue = resources["segmentSeed"].Value]
-    [#if !(getReference(segmentSeedId)?has_content)]
+    [#if !(getReference(AZURE_PROVIDER, segmentSeedId)?has_content)]
 
       [#if deploymentSubsetRequired("prologue", false)]
         [@addToDefaultBashScriptOutput
@@ -118,8 +118,8 @@
                 formatAzureStorageListKeys(accountId, accountName)
             )
         dependsOn=[
-            getReference(accountId, accountName),
-            getReference(keyvaultId, keyvaultName)
+            getReference(AZURE_PROVIDER, {"Id": accountId, "Name": accountName}),
+            getReference(AZURE_PROVIDER, {"Id": keyvaultId, "Name": keyvaultName})
         ]
     /]
 
@@ -135,7 +135,7 @@
       automaticSnapshotPolicyEnabled=(solution.Lifecycle.BlobAutoSnapshots)!false
       dependsOn=
         [
-          getReference(accountId, accountName)
+          getReference(AZURE_PROVIDER, {"Id": accountId, "Name": accountName})
         ]
     /]
 
@@ -148,8 +148,8 @@
         publicAccess="None"
         dependsOn=
           [
-            getReference(accountId, accountName),
-            getReference(blobId, blobName)
+            getReference(AZURE_PROVIDER, {"Id": accountId, "Name": accountName}),
+            getReference(AZURE_PROVIDER, {"Id": blobId, "Name": blobName})
           ]
       /]
     [/#list]
@@ -182,8 +182,8 @@
             publicAccess=publicAccess
             dependsOn=
               [
-                getReference(accountId, accountName),
-                getReference(blobId, blobName)
+                getReference(AZURE_PROVIDER, {"Id": accountId, "Name": accountName}),
+                getReference(AZURE_PROVIDER, {"Id": blobId, "Name": blobName})
               ]
           /]
         [/#if]

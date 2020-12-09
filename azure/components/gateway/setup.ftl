@@ -57,7 +57,7 @@
     [@createPrivateDnsZoneVnetLink
       id=dnsZoneLinkId
       name=dnsZoneLinkName
-      vnetId=getReference(networkResources["vnet"])
+      vnetId=getReference(AZURE_PROVIDER,networkResources["vnet"])
       autoRegistrationEnabled=true
     /]
 

@@ -216,7 +216,7 @@ reference: https://tinyurl.com/y42ot42k --]
     {
       "reference": {
         "keyVault": {
-          "id": getReference(vaultId)
+          "id": getReference(AZURE_PROVIDER, vaultId)
         },
         "secretName": secretName
       }

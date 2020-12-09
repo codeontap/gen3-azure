@@ -61,7 +61,7 @@
             "Name": networkTier.Name,
             "Address": subnetCIDRs[tierId?index],
             "Type": AZURE_SUBNET_RESOURCE_TYPE,
-            "Reference" : getReference(subnetId, networkTier.Name)
+            "Reference" : getReference(AZURE_PROVIDER, {"Id": subnetId, "Name": networkTier.Name})
           }
         }
       }
@@ -90,7 +90,7 @@
         "Id" : elbNsgId,
         "Name" : elbNsgName,
         "Type" : AZURE_VIRTUAL_NETWORK_SECURITY_GROUP_RESOURCE_TYPE,
-        "Reference" : getReference(elbNsgId, elbNsgName)
+        "Reference" : getReference(AZURE_PROVIDER, {"Id": elbNsgId, "Name": elbNsgName})
       }]
   [/#if]
 
@@ -109,7 +109,7 @@
           "Id" : nsgId,
           "Name" : nsgName,
           "Type" : AZURE_VIRTUAL_NETWORK_SECURITY_GROUP_RESOURCE_TYPE,
-          "Reference" : getReference(nsgId, nsgName)
+          "Reference" : getReference(AZURE_PROVIDER, {"Id": nsgId, "Name": nsgName})
         }
       } +
       attributeIfContent("elbNSG", elbNSG) +

@@ -30,13 +30,13 @@
     getResourceType(subnetResource.Id),
     networkVnetResource.Name
   )]
-  [#local subnetReference = getReference(subnetResource.Id)]
+  [#local subnetReference = getReference(AZURE_PROVIDER, subnetResource.Id)]
 
   [#-- Baseline Component Lookup --]
   [#local baselineLinks = getBaselineLinks(occurrence, ["SSHKey"], false, false)]
   [#local baselineAttributes = baselineLinks["SSHKey"].State.Attributes]
   [#local baselineResources = baselineLinks["SSHKey"].State.Resources]
-  [#local sshKeyPairResourceId = getReference(baselineResources["vmKeyPair"].Id)]
+  [#local sshKeyPairResourceId = getReference(AZURE_PROVIDER, baselineResources["vmKeyPair"].Id)]
   [#local sshKey = baselineResources["vmKeyPair"]]
   [#local sshPublicKeyParameterName = sshKey.Name + "PublicKey"]
 

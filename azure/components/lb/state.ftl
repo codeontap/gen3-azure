@@ -8,7 +8,7 @@
     [#local baselineLinks = getBaselineLinks(occurrence, ["SSHKey"], false, false)]
     [#local baselineAttributes = baselineLinks["SSHKey"].State.Attributes]
     [#local keyVaultId = baselineAttributes["KEYVAULT_ID"]]
-    [#local keyVaultName = getReference(formatId(keyVaultId, NAME_ATTRIBUTE_TYPE))]
+    [#local keyVaultName = getReference(AZURE_PROVIDER,formatId(keyVaultId, NAME_ATTRIBUTE_TYPE))]
 
     [#-- Name Processing --]
     [#local id = formatResourceId(AZURE_APPLICATION_GATEWAY_RESOURCE_TYPE, core.FullName)]
@@ -48,7 +48,7 @@
                     "Name" : name,
                     "Type" : resourceType,
                     "Sku" : "Standard_v2",
-                    "Reference" : getReference(id, name)
+                    "Reference" : getReference(AZURE_PROVIDER, {"Id": id, "Name": name})
                 },
                 "publicIP" : {
                     "Id" : ipId,
@@ -60,19 +60,20 @@
                     "Id" : identityId,
                     "Name" : identityName,
                     "Type" : AZURE_USER_ASSIGNED_IDENTITY_RESOURCE_TYPE,
-                    "PrincipalId" : getReference(identityId, ALLOCATION_ATTRIBUTE_TYPE, AZURE_USER_ASSIGNED_IDENTITY_RESOURCE_TYPE),
-                    "Reference" : getReference(identityId, identityName)
+                    // TODO - likely broken call below
+                    "PrincipalId" : getReference(AZURE_PROVIDER, identityId, ALLOCATION_ATTRIBUTE_TYPE, AZURE_USER_ASSIGNED_IDENTITY_RESOURCE_TYPE),
+                    "Reference" : getReference(AZURE_PROVIDER, {"Id": identityId, "Name": identityName})
                 },
                 "accessPolicy" : {
                     "Id" : accessPolicyId,
                     "Name" : accessPolicyName,
                     "Type" : AZURE_KEYVAULT_ACCESS_POLICY_RESOURCE_TYPE,
                     "KeyVault" : keyVaultName,
-                    "Reference" : getReference(accessPolicyId, accessPolicyName)
+                    "Reference" : getReference(AZURE_PROVIDER,{"Id": accessPolicyId, "Name": accessPolicyName})
                 }
             },
             "Attributes" : {
-                "INTERNAL_FQDN" : getReference(id, name, DNS_ATTRIBUTE_TYPE)
+                "INTERNAL_FQDN" : getReference(AZURE_PROVIDER,{"Id": id, "Name": name}, DNS_ATTRIBUTE_TYPE)
             },
             "Roles" : {
                 "Inbound" : {},

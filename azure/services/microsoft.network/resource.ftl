@@ -282,7 +282,7 @@
   actions=[]]
 
   [#local properties = {} +
-    attributeIfContent("id", getReference(id, name)) +
+    attributeIfContent("id", getReference(AZURE_PROVIDER, {"Id": id, "Name": name})) +
     attributeIfContent("serviceName", serviceName) +
     attributeIfContent("actions", actions)
   ]
@@ -306,8 +306,8 @@
   ]
 
   [#return {} +
-    attributeIfContent("id", getReference(id)) +
-    attributeIfContent("name", getReference(id, name, NAME_ATTRIBUTE_TYPE)!"") +
+    attributeIfContent("id", getReference(AZURE_PROVIDER, id)) +
+    attributeIfContent("name", getReference(AZURE_PROVIDER, {"Id": id, "Name": name}, NAME_ATTRIBUTE_TYPE)!"") +
     attributeIfContent("properties", properties)
   ]
 [/#function]

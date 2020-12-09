@@ -133,7 +133,7 @@
 [#--    - cannot be used to retrieve resource attributes            --]
 [#-- getReference combines both as necessary to construct any       --]
 [#-- particular combination of reference requirements               --]
-[#function getReference id name="" attributeType=""]
+[#function azure_getReference id name="" attributeType=""]
 
     [#if id?is_hash
         && id?keys?seq_contains("Id")
@@ -143,7 +143,7 @@
     [/#if]
 
     [#if ! isPartOfCurrentDeploymentUnit(id)]
-        [#return getExistingReference(id, attributeType)]
+        [#return getExistingReference(AZURE_PROVIDER, id, attributeType)]
     [/#if]
     
     [#-- Reference Properties --]
@@ -369,15 +369,6 @@ id, name, type, location, managedBy, tags, properties.provisioningState --]
         [#return {}]
     [/#if]
 [/#function]
-
-[#-- Get stack output --]
-[#function getExistingReference resourceId attributeType="" inRegion="" inDeploymentUnit="" inAccount=""]
-    [#local attributeType = 
-        (attributeType == REFERENCE_ATTRIBUTE_TYPE)
-            ?then("", attributeType )]
-    [#return getStackOutput(AZURE_PROVIDER, formatAttributeId(resourceId, attributeType), inDeploymentUnit, inRegion, inAccount) ]
-[/#function]
-
 
 [#-- Formats a call to the Azure ARM "concat" function. --]
 [#function formatAzureConcatFunction segments...]

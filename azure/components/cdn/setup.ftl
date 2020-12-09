@@ -263,7 +263,7 @@
     [#-- Epilogue --]
     [#if deploymentSubsetRequired("epilogue", false)]
         [#-- If there is something to purge, and its previously been deployed, purge it --]
-        [#if invalidationPaths?has_content && getReference(frontDoor.Id)?has_content]
+        [#if invalidationPaths?has_content && getReference(AZURE_PROVIDER, frontDoor.Id)?has_content]
             [@addToDefaultBashScriptOutput
                 [
                     "case $\{DEPLOYMENT_OPERATION} in",
@@ -271,7 +271,7 @@
                     "    # Purge FrontDoor Endpoint",
                     "    info \"Purging frontDoor content ... \"",
                     "    az_purge_frontdoor_endpoint" +
-                        " \"" + getReference("ResourceGroup") + "\"" +
+                        " \"" + getReference(AZURE_PROVIDER, "ResourceGroup") + "\"" +
                         " \"" + frontDoor.Name + "\"" +
                         " \"" + asFlattenedArray(invalidationPaths, true)?join(' ') + "\" || return $?"
                         ";;",

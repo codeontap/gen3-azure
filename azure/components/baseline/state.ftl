@@ -5,10 +5,10 @@
   [#local solution = occurrence.Configuration.Solution]
 
   [#local segmentSeedId = formatSegmentSeedId() ]
-  [#if !(getReference(segmentSeedId)?has_content) ]
+  [#if !(getReference(AZURE_PROVIDER, segmentSeedId)?has_content) ]
     [#local segmentSeedValue = (commandLineOptions.Run.Id + accountObject.Seed)[0..(solution.Seed.Length - 1)]]
   [#else]
-    [#local segmentSeedValue = getReference(segmentSeedId) ]
+    [#local segmentSeedValue = getReference(AZURE_PROVIDER, segmentSeedId) ]
   [/#if]
 
   [#local storageAccountId = formatResourceId(AZURE_STORAGEACCOUNT_RESOURCE_TYPE, core.Id)]
@@ -83,7 +83,7 @@
           "Id" : secretId,
           "Name" : secretName,
           "Type" : AZURE_KEYVAULT_SECRET_RESOURCE_TYPE,
-          "Reference" : getReference(secretId, secretName)
+          "Reference" : getReference(AZURE_PROVIDER, {"Id": secretId, "Name": secretName})
         },
         "registries" : registries
       },

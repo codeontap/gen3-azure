@@ -124,8 +124,8 @@
                                                 "Id" : identityproviderId,
                                                 "Name" : identityproviderName,
                                                 "Type" : AZURE_API_MANAGEMENT_SERVICE_IDENTITY_PROVIDER,
-                                                "Reference" : getReference(identityproviderId, identityproviderName),
-                                                "ObjectId" : subAttributes["CLIENT_OBJECT_ID"]!getReference(subCore.Id),
+                                                "Reference" : getReference(AZURE_PROVIDER, {"Id": identityproviderId, "Name": identityproviderName}),
+                                                "ObjectId" : subAttributes["CLIENT_OBJECT_ID"]!getReference(AZURE_PROVIDER, subCore.Id),
                                                 "SecretId" : identityProviderSecretId
                                             }
                                         }
@@ -168,20 +168,20 @@
                     "Name" : serviceName,
                     "ManagedIdentity" : apimManagedIdentity,
                     "Type" : AZURE_API_MANAGEMENT_SERVICE,
-                    "Reference" : getReference(serviceId, serviceName)
+                    "Reference" : getReference(AZURE_PROVIDER, {"Id": serviceId, "Name": serviceName})
                 },
                 "identityproviders" : identityProviders,
                 "product" : {
                     "Id": productId,
                     "Name" : productName,
                     "Type" : AZURE_API_MANAGEMENT_SERVICE_PRODUCT,
-                    "Reference" : getReference(productId, productName)
+                    "Reference" : getReference(AZURE_PROVIDER, {"Id": productId, "Name": productName})
                 },
                 "api" : {
                     "Id" : apiId,
                     "Name" : apiName,
                     "Type" : AZURE_API_MANAGEMENT_SERVICE_API,
-                    "Reference" : getReference(apiId, apiName)
+                    "Reference" : getReference(AZURE_PROVIDER, {"Id": apiId, "Name": apiName})
                 }
             },
             "Attributes" : {

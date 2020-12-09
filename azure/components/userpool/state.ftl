@@ -46,12 +46,12 @@
                     "ClientAppId" : clientAppId,
                     "Name" : name,
                     "Type" : AZURE_APPLICATION_REGISTRATION_CLIENT_RESOURCE_TYPE,
-                    "Reference" : getReference(id, name)
+                    "Reference" : getReference(AZURE_PROVIDER, {"Id": id, "Name": name})
                 }
             },
             "Attributes" : parentAttributes + {
-                "CLIENT_APP_ID" : getReference(clientAppId),
-                "CLIENT_OBJECT_ID" : getReference(id)
+                "CLIENT_APP_ID" : getReference(AZURE_PROVIDER, clientAppId),
+                "CLIENT_OBJECT_ID" : getReference(AZURE_PROVIDER, id)
             },
             "Roles" : {
                 "Inbound" : {},

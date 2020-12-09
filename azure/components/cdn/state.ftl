@@ -6,7 +6,7 @@
     [#local solution = occurrence.Configuration.Solution]
 
     [#local segmentSeedId = formatSegmentSeedId() ]
-    [#local segmentSeed = getReference(segmentSeedId)]
+    [#local segmentSeed = getReference(AZURE_PROVIDER, segmentSeedId)]
 
     [#local frontDoorId = formatResourceId(AZURE_FRONTDOOR_RESOURCE_TYPE, core.Id)]
     [#local frontDoorName = formatAzureResourceName(
@@ -28,7 +28,7 @@
         [#local primaryDomainObject = getCertificatePrimaryDomain(certificateObject) ]
         [#local fqdn = formatDomainName(hostName, primaryDomainObject)]
     [#else]
-        [#local fqdn = getReference(frontDoorId)]
+        [#local fqdn = getReference(AZURE_PROVIDER, frontDoorId)]
     [/#if]
 
     [#assign componentState =
@@ -44,13 +44,13 @@
                     "Id" : wafPolicyId,
                     "Name" : wafPolicyName,
                     "Type" : AZURE_FRONTDOOR_WAF_POLICY_RESOURCE_TYPE,
-                    "Reference" : getReference(wafPolicyId, wafPolicyName)
+                    "Reference" : getReference(AZURE_PROVIDER, {"Id": wafPolicyId, "Name": wafPolicyName})
                 }
             },
             "Attributes" : {
                 "FQDN" : fqdn,
                 "URL" : "https://" + fqdn,
-                "DISTRIBUTION_ID" : getReference(frontDoorId)
+                "DISTRIBUTION_ID" : getReference(AZURE_PROVIDER, frontDoorId)
             },
             "Roles" : {
                 "Inbound" : {},

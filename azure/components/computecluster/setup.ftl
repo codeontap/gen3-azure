@@ -281,7 +281,7 @@
     [#local nicIpConfig =
         getIPConfiguration(
             nicIpConfigName,
-            getReference(subnet.Id),
+            getReference(AZURE_PROVIDER, subnet.Id),
             true, 
             publicIp.Reference, 
             "", "", [], "", "", "", "Dynamic", "IPv4", [],

@@ -49,25 +49,25 @@
                     "Id" : storageAccountId,
                     "Name" : accountName,
                     "Type" : AZURE_STORAGEACCOUNT_RESOURCE_TYPE,
-                    "Reference" : getReference(storageAccountId, accountName)
+                    "Reference" : getReference(AZURE_PROVIDER, {"Id": storageAccountId, "Name": accountName})
                 },
                 "blobService" : {
                     "Id" : blobId,
                     "Name" : blobName,
                     "Type" : AZURE_BLOBSERVICE_RESOURCE_TYPE,
-                    "Reference" : getReference(blobId, blobName)
+                    "Reference" : getReference(AZURE_PROVIDER, {"Id": blobId, "Name": blobName})
                 },
                 "container" : {
                     "Id" : containerId,
                     "Name" : containerName,
                     "Type" : AZURE_BLOBSERVICE_CONTAINER_RESOURCE_TYPE,
-                    "Reference" : getReference(containerId, containerName)
+                    "Reference" : getReference(AZURE_PROVIDER, {"Id": containerId, "Name": containerName})
                 },
                 "secret" : {
                     "Id" : secretId,
                     "Name" : secretName,
                     "Type" : AZURE_KEYVAULT_SECRET_RESOURCE_TYPE,
-                    "Reference" : getReference(secretId, secretName)
+                    "Reference" : getReference(AZURE_PROVIDER, {"Id": secretId, "Name": secretName})
                 }
             },
             "Attributes" : {

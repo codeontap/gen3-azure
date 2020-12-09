@@ -132,7 +132,7 @@
 
         [#-- Determine dependencies --]
         [#local dependencies = [
-            getReference(vnetId, vnetName)
+            getReference(AZURE_PROVIDER, {"Id": vnetId, "Name": vnetName})
         ]]
 
         [#if subnetIndex > 0]
@@ -190,7 +190,7 @@
 
         [#-- Add routeTable details if applicable --]
         [#if routeTableResource?has_content]
-          [#local dependencies += [getReference(routeTableResource)]]
+          [#local dependencies += [getReference(AZURE_PROVIDER, routeTableResource)]]
         [/#if]
 
         [#if networkTier.Name == "elb"]
@@ -198,7 +198,7 @@
           [#local dependencies += [elbNSG.Reference]]
         [#else]
           [#local networkSecurityGroupReference = getSubResourceReference(
-            getReference(networkSecurityGroupId, networkSecurityGroupName)
+            getReference(AZURE_PROVIDER, {"Id": networkSecurityGroupId, "Name": networkSecurityGroupName})
           )]
         [/#if]
 
@@ -208,7 +208,7 @@
           addressPrefix=subnet.Address
           networkSecurityGroup=networkSecurityGroupReference
           routeTable={} + routeTableResource?has_content?then(
-            getSubResourceReference(getReference(routeTableResource)),
+            getSubResourceReference(getReference(AZURE_PROVIDER, routeTableResource)),
             {}
           )
           serviceEndpoints=serviceEndpoints
@@ -266,7 +266,7 @@
             direction=direction
             dependsOn=
               [
-                getReference(nsgId, nsgName)
+                getReference(AZURE_PROVIDER, {"Id": nsgId, "Name": nsgName})
               ]
           /]
 
@@ -319,7 +319,7 @@
       [@createNetworkWatcherFlowLog
         id=flowLogNSGId
         name=flowLogNSGName
-        targetResourceId=getReference(networkSecurityGroupId, networkSecurityGroupName)
+        targetResourceId=getReference(AZURE_PROVIDER, {"Id": networkSecurityGroupId, "Name": networkSecurityGroupName})
         storageId=flowLogStorageId
         enabled=true
         trafficAnalyticsInterval="0"
@@ -329,7 +329,7 @@
         formatVersion="0"
         dependsOn=
           [
-            getReference(flowLogStorageId)
+            getReference(AZURE_PROVIDER,flowLogStorageId)
           ]
       /]
     [/#if]

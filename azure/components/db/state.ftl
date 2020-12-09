@@ -32,7 +32,7 @@
                 "Id" : configId,
                 "Name" : configName,
                 "Type" : AZURE_DB_POSTGRES_SERVER_CONFIGURATION_RESOURCE_TYPE,
-                "Reference": getReference(configId, configName)
+                "Reference": getReference(AZURE_PROVIDER, {"Id": configId, "Name": configName})
             }}]
     [/#list]
 
@@ -53,7 +53,7 @@
         [#local masterSecret = getOccurrenceSettingValue(occurrence, "MASTER_SECRET", !solution.Enabled) ]
     [/#if]
 
-    [#local fqdn = getReference(dbServerId, dbServerName, URL_ATTRIBUTE_TYPE)]
+    [#local fqdn = getReference(AZURE_PROVIDER, {"Id": dbServerId, "Name": dbServerName}, URL_ATTRIBUTE_TYPE)]
 
     [#assign componentState =
         {
@@ -62,20 +62,20 @@
                     "Id" : dbServerId,
                     "Name" : dbServerName,
                     "Type" : AZURE_DB_POSTGRES_SERVER_RESOURCE_TYPE,
-                    "Reference": getReference(dbServerId, dbServerName)
+                    "Reference": getReference(AZURE_PROVIDER, {"Id": dbServerId, "Name": dbServerName})
                 },
                 "database" : {
                     "Id" : databaseId,
                     "Name" : databaseName,
                     "Type" : AZURE_DB_POSTGRES_SERVER_DATABASE_RESOURCE_TYPE,
-                    "Reference": getReference(databaseId, databaseName)
+                    "Reference": getReference(AZURE_PROVIDER, {"Id": databaseId, "Name": databaseName})
                 },
                 "dbconfigs" : configs,
                 "dbvnetrule" : {
                     "Id" : vnetRuleId,
                     "Name" : vnetRuleName,
                     "Type" : AZURE_DB_POSTGRES_SERVER_VNET_RULE_RESOURCE_TYPE,
-                    "Reference": getReference(vnetRuleId, vnetRuleName)
+                    "Reference": getReference(AZURE_PROVIDER, {"Id": vnetRuleId, "Name": vnetRuleName})
                 }
             },
             "Attributes" : {

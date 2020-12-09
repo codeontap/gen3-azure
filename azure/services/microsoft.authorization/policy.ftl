@@ -22,7 +22,7 @@
 [#-- through occurrence.State.Resources[<resource>].Reference --]
 [#function getRoleReference role]
     [#local userRole = userRoles[role]]
-    [#return getReference(userRole.Id)]
+    [#return getReference(AZURE_PROVIDER, userRole.Id)]
 [/#function]
 
 [#-- App Registration Endpoints --]

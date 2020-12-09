@@ -21,7 +21,7 @@
     [#local baselineLinks = getBaselineLinks(occurrence, ["SSHKey"], false, false)]
     [#local baselineAttributes = baselineLinks["SSHKey"].State.Attributes]
     [#local keyVaultId = baselineAttributes["KEYVAULT_ID"]]
-    [#local keyVaultName = getReference(formatId(keyVaultId, NAME_ATTRIBUTE_TYPE))]
+    [#local keyVaultName = getReference(AZURE_PROVIDER, formatId(keyVaultId, NAME_ATTRIBUTE_TYPE))]
 
     [#-- Add NetworkACL Configuration --]
     [#local virtualNetworkRulesConfiguration = []]

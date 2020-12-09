@@ -23,7 +23,7 @@
                         "Id" : planId,
                         "Name" : planName,
                         "Type" : AZURE_APP_SERVICE_PLAN_RESOURCE_TYPE,
-                        "Reference" : getReference(planId, planName)
+                        "Reference" : getReference(AZURE_PROVIDER, {"Id": planId, "Name": planName})
                     }
                 }]
 
@@ -39,7 +39,7 @@
                 "Id" : autoscaleId,
                 "Name" : autoscaleName,
                 "Type" : AZURE_AUTOSCALE_SETTINGS_RESOURCE_TYPE,
-                "Reference" : getReference(autoscaleId, autoscaleName)
+                "Reference" : getReference(AZURE_PROVIDER,{"Id": autoscaleId, "Name": autoscaleName})
             }
         }]
     [/#if]
