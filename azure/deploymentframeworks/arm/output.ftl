@@ -137,7 +137,7 @@
 [#function pseudoArmStackOutputScript description outputs filesuffix=""]
     [#local outputString = ""]
 
-    [#list getArmTemplateCoreOutputs(region, accountObject.AzureId, commandLineOptions.Deployment.ResourceGroup.Name) as key,value]
+    [#list getArmTemplateCoreOutputs(region, accountObject.ProviderId, commandLineOptions.Deployment.ResourceGroup.Name) as key,value]
         [#if value?is_hash]
             [#local outputs += { key, value.value }]
         [#else]
@@ -281,7 +281,7 @@
     [#--          The marker indicates the minimum scope to which a resource exists.                --]
     [#local resourceProfileScope = getAzureResourceProfile(getResourceType(id)).scope]
     [#local currentScope = {
-        "Subscription" : accountObject.AzureId,
+        "Subscription" : accountObject.ProviderId,
         "ResourceGroup" : commandLineOptions.Deployment.ResourceGroup.Name
     }]
 

@@ -4,7 +4,7 @@
 [#function azure_input_composite_stackoutput_filter outputFilter]
   [#return
     {
-      "Subscription" : (outputFilter.Account)!accountObject.AzureId,
+      "Subscription" : (outputFilter.Account)!accountObject.ProviderId,
       "Region" : outputFilter.Region,
       "DeploymentUnit" : outputFilter.DeploymentUnit
     }
