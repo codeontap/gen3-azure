@@ -118,6 +118,7 @@
 
   [#local storageEndpoints =
     getReference(
+      AZURE_PROVIDER, 
       formatId(
         storageAccountId,
         DICTIONARY_ATTRIBUTE_TYPE

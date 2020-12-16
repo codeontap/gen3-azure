@@ -54,14 +54,14 @@
                     "Id" : ipId,
                     "Name" : ipName,
                     "Type" : AZURE_PUBLIC_IP_ADDRESS_RESOURCE_TYPE,
-                    "Reference" : getReference(ipId, ipName)
+                    "Reference" : getReference(AZURE_PROVIDER, {"Id": ipId, "Name": ipName})
                 },
                 "identity" : {
                     "Id" : identityId,
                     "Name" : identityName,
                     "Type" : AZURE_USER_ASSIGNED_IDENTITY_RESOURCE_TYPE,
                     // TODO - likely broken call below
-                    "PrincipalId" : getReference(AZURE_PROVIDER, identityId, ALLOCATION_ATTRIBUTE_TYPE, AZURE_USER_ASSIGNED_IDENTITY_RESOURCE_TYPE),
+                    "PrincipalId" : getReference(AZURE_PROVIDER, {"Id": identityId, "Name": ALLOCATION_ATTRIBUTE_TYPE}, AZURE_USER_ASSIGNED_IDENTITY_RESOURCE_TYPE),
                     "Reference" : getReference(AZURE_PROVIDER, {"Id": identityId, "Name": identityName})
                 },
                 "accessPolicy" : {

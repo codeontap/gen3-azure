@@ -243,8 +243,8 @@
         
         [#local destination = 
             getReference(
-                publicIp.Id,
-                publicIp.Name,
+                AZURE_PROVIDER, 
+                {"Id": publicIp.Id, "Name": publicIp.Name},
                 IP_ADDRESS_ATTRIBUTE_TYPE)]
                 
         [@createNetworkSecurityGroupSecurityRule

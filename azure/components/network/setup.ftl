@@ -139,12 +139,16 @@
           [#local previousSubnet = resources["subnets"]?values[subnetIndex - 1].subnet]
           [#local dependencies += [
             getReference(
-              previousSubnet.Id,
-              formatAzureResourceName(
-                previousSubnet.Name,
-                AZURE_SUBNET_RESOURCE_TYPE,
-                vnetName
-              )
+              AZURE_PROVIDER, 
+              {
+                "Id": previousSubnet.Id, 
+                "Name":
+                  formatAzureResourceName(
+                    previousSubnet.Name,
+                    AZURE_SUBNET_RESOURCE_TYPE,
+                    vnetName
+                  )
+              }
             )
           ]]
         [/#if]
