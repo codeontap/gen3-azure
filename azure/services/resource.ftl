@@ -133,7 +133,8 @@
 [#--    - cannot be used to retrieve resource attributes            --]
 [#-- getReference combines both as necessary to construct any       --]
 [#-- particular combination of reference requirements               --]
-[#function azure_getReference id name="" attributeType=""]
+[#function azure_getReference id attributeType="" inRegion="" optParams={}]
+    [#local name = ""]
 
     [#if id?is_hash
         && id?keys?seq_contains("Id")
