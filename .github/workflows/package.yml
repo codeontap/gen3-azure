@@ -16,7 +16,7 @@ on:
     types:
       - completed
 
-  pull-request:
+  pull_request:
 
 jobs:
   build:
